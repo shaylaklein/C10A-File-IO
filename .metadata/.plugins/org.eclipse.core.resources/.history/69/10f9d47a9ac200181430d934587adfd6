@@ -1,0 +1,50 @@
+import java.util.*;
+import java.io.File; 
+
+public class ScoreTrakker {
+	
+	private ArrayList<Student> students;
+	
+	public void loadDataFromFile(String fName) throws Exception{
+		
+		File f = new File("Z:\\adit\\My Documents\\C10A\\File IO\\" + fName);
+		
+		System.out.print(f.toString());
+		
+		Scanner scan = new Scanner(f);
+		
+		System.out.print("test1");
+		
+		while (scan.hasNextLine()) {
+			Student s = new Student((scan.next() + " " + scan.next()), Integer.parseInt(scan.next()));
+			students.add(s);
+		}
+	}
+	
+	public void printInOrder() {
+		Collections.sort(students);
+		System.out.println("Student Score List");
+		for(Student s : students) {
+			System.out.println(s.toString());
+		}
+	}
+	
+	public void processFiles(String fName) {
+		
+		try {
+			loadDataFromFile(fName);
+			printInOrder();
+		} catch (Exception e) {
+			System.out.println("Invalid File");
+		}
+		
+		
+	}
+	
+	public static void main(String[]args) {
+		ScoreTrakker trakk = new ScoreTrakker();
+		trakk.processFiles("scores.txt");
+	}
+
+}
+

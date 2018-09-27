@@ -1,4 +1,48 @@
+import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException; 
 
 public class ScoreTrakker {
+	
+	private ArrayList<Student> students = new ArrayList<Student>();
+	
+	public void loadDataFromFile(String fName){
+		
+		File f = new File("Z:\\adit\\My Documents\\C10A\\File IO\\" + fName);
+		
+		Scanner scan;
+		try {
+			scan = new Scanner(f);
+			while (scan.hasNext()) {
+				Student s = new Student((scan.next() + " " + scan.next()), Integer.parseInt(scan.next()));
+				students.add(s);
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Invalid File");
+		}
+		
+	}
+	
+	public void printInOrder() {
+		Collections.sort(students);
+		System.out.println("Student Score List");
+		for(Student s : students) {
+			System.out.println(s.toString());
+		}
+	}
+	
+	public void processFiles(String fName) {
+		
+		loadDataFromFile(fName);
+		printInOrder();
+		
+		
+	}
+	
+	public static void main(String[]args) {
+		ScoreTrakker trakk = new ScoreTrakker();
+		trakk.processFiles("scores.txt");
+	}
 
 }
+
