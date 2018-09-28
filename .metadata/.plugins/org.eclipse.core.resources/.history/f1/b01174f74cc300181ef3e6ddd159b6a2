@@ -1,0 +1,60 @@
+import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException; 
+
+public class ScoreTrakker {
+	
+	private ArrayList<Student> students = new ArrayList<Student>();
+	private String[] files = {"scores.txt", "badscore.txt", "nofile.txt"};
+	
+	public void loadDataFromFile(String fName){
+		
+		File f = new File("Z:\\adit\\My Documents\\C10A\\File IO\\" + fName);
+		
+		Scanner scan;
+		try {
+			scan = new Scanner(f);
+			while (scan.hasNext()) {
+				String sName = (scan.next() + " " + scan.next());
+				String sScore = scan.next();
+				try {
+					int score = Integer.parseInt(sScore);
+					Student s = new Student(sName, score);
+					students.add(s);
+				} catch (NumberFormatException n) {
+					System.out.println("Incorrect format for " + sName + " not a valid score: " + n);
+				}
+				
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Can't open file: " + fName);
+		}
+		
+	}
+	
+	public void printInOrder() {
+		Collections.sort(students);
+		System.out.println("Student Score List");
+		for(Student s : students) {
+			System.out.println(s.toString());
+		}
+	}
+	
+	public void processFiles(String fName) {
+		
+		loadDataFromFile(fName);
+		printInOrder();
+		
+		
+	}
+	
+	public static void main(String[]args) {
+		ScoreTrakker trakk = new ScoreTrakker();
+		trakk.processFiles("scores.txt");
+		trakk.processFiles("badscore.txt");
+		trakk.processFiles("nofile.txt");
+		
+	}
+
+}
+

@@ -1,15 +1,32 @@
+/**
+ * 
+ * @author Shayla Klein 
+ * @author Connor Brennan
+ * 
+ * C10A File IO Pair Exercise
+ *
+ */
+
 
 public class Student implements Comparable<Student> {
 
 	private String name; 
 	private int score;
 	
+	/**
+	 * Constructor for the student class. Initializes the name and score fields
+	 * @param name
+	 * @param score
+	 */
 	public Student(String name, int score) {
 		super();
 		this.name = name;
 		this.score = score;
 	} 
 	
+	/**
+	 * Compares the students's scores to one another. Determines how the ArrayList will sort
+	 */
 	@Override
 	public int compareTo (Student o) {
 		if (score < o.score) 
@@ -20,6 +37,9 @@ public class Student implements Comparable<Student> {
 			return 0; 
 	}
 
+	/**
+	 * Converts the name of the student and their score to a string to be output
+	 */
 	@Override
 	public String toString() {
 		return name + " " + score;
